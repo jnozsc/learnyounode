@@ -1,12 +1,12 @@
 var net = require('net')
-var portNumber = process.argv[2]
+      var portNumber = process.argv[2]
 
-var server = net.createServer(function (socket) {
+var server = net.createServer(function(socket) {
   // socket handling logic
-  var date = new Date(); 
+  var date = new Date();
   //console.log("aaaa "+date.getTimezoneOffset());
   date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
-  socket.write(date.toISOString().substring(0,16).replace("T"," "));
+  socket.write(date.toISOString().substring(0, 16).replace("T", " "));
   socket.end();
 })
 
@@ -20,16 +20,16 @@ function zeroFill(i) {
   return (i < 10 ? '0' : '') + i
 }
 
-function now () {
+function now() {
   var d = new Date()
-    return d.getFullYear() + '-'
-           + zeroFill(d.getMonth() + 1) + '-'
-           + zeroFill(d.getDate()) + ' '
-           + zeroFill(d.getHours()) + ':'
-           + zeroFill(d.getMinutes())
+  return d.getFullYear() + '-'
+       + zeroFill(d.getMonth() + 1) + '-'
+       + zeroFill(d.getDate()) + ' '
+       + zeroFill(d.getHours()) + ':'
+       + zeroFill(d.getMinutes())
 }
-  
-var server = net.createServer(function (socket) {
+
+var server = net.createServer(function(socket) {
   socket.end(now() + '\n')
 })
 
